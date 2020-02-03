@@ -1,0 +1,31 @@
+body {
+    background-image: url("./img/bg1.png");
+    height:  100vh ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.form {
+    background-color: aliceblue;
+    margin: 0 auto ;
+    width: 50vw;
+    height: scroll;
+    padding: 1.3rem;
+}
+
+h3 {
+    margin-left: 4rem;
+    margin-right: 4rem;
+    margin-bottom: 3rem;
+}
+
+@media only screen and (max-width: 45000px) {
+    .form {
+        background-color: aliceblue;
+        margin: 0 auto ;
+        width: 80vw;
+        height: scroll;
+        padding: 1.3rem;
+    }
+  }
