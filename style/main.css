@@ -430,6 +430,10 @@ footer .socials {
     font-size: 10px;
   }
 
+
+  #details {
+    text-align: left !important;
+  }
   .card .acc-owner {
     width: 60%;
   }
@@ -510,6 +514,8 @@ footer .socials {
     cursor: text;
   }
   
+
+  
   .areyou {
     font-size: 28px;
   }
@@ -552,6 +558,7 @@ footer .socials {
     font-size: 10px;
   }
 
+  
   footer a,
   p {
     font-size: 14px;
@@ -585,6 +592,143 @@ footer .socials {
   }
 }
 
+
+#space{
+  width : 48%;
+  margin: .5rem;
+  }
+  
+  
+
+
+
+  #event__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+    grid-gap: 20px;
+    align-items: stretch;
+    width: 60vw;
+    margin: 0 auto;
+    margin-top: 2rem;
+  }
+  
+
+  #stats__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+    grid-gap: 5rem;
+    padding-top: 8rem;
+    align-items: stretch;
+    width: 60vw;
+    margin: 0 auto;
+    margin-top: 0rem;
+  }
+  
+  .stat__pic {
+    max-width: 90%;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+    grid-gap: 20px;
+    align-items: stretch;
+    width: 60vw;
+    margin: 0 auto;
+    margin-top: 2rem;
+  }
+  
+  .grid > article {
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
+  }
+  
+  .grid > article img {
+    max-width: 100%;
+  }
+  
+  .grid .text {
+    padding: 20px;
+  }
+  
+
+
+
+
+
+.form-row {
+  position: relative;
+  margin-bottom: 18px; }
+
+
+.card1 {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  width: 100%;
+  grid-row-gap: .5rem; 
+  background-color: #fff;
+  padding-bottom: 6rem;
+  padding-left : 1.5rem;
+  padding-right:1.5rem;
+}
+
+
+#cardt {
+  margin-top: 5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 8%;
+  padding : 1rem 0;
+}
+.card1wrap img {
+  max-width: 100%;
+ 
+}
+.card1wrap {
+ 
+}
+
+#lost_item {
+  width: 60vw;
+  margin:0 auto;
+  
+}
+
+.pic_image {
+  max-width: 100%;
+  max-height: 100%;
+}
+.card1wrap2 {
+  display : grid;
+  margin-top: 2rem;
+  
+}
+.span {
+  float: right;
+  justify-content: right;
+}
+.card__wrapper__font
+ {
+   padding-left: .4rem;
+  font-weight: 900; 
+  font-size: 1.4rem;
+ }
+
+ .card__wrapper__font > img {
+   width: 1.2rem;
+ }
+
+.span  {
+  font-size: 1.2rem;
+}
+ .card1wrap2__font2 {
+   font-size: 1.4rem;
+   font-weight: 1000;
+ }
+
+ .card1wrap2__font1 {
+  font-size: 1.2rem;
+  font-weight: 1000;
+}
 @media only screen and (min-width: 1440px) {
 
   .card .acc-owner {
