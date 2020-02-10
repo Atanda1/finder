@@ -692,7 +692,9 @@ footer .socials {
   margin:0 auto;
   
 }
-
+.trending {
+  font-size: 2rem;
+}
 .pic_image {
   max-width: 100%;
   max-height: 100%;
