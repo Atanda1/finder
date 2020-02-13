@@ -13,6 +13,7 @@
       <div class="form" style="height: 500px;position:relative;margin-top: 2rem;margin-top: 2rem;">
             <div style="max-height:100%;" >
           <h3>LOGIN TO FINDER</h3>
+            <h4 id="invalid_login"></h4>
             <form id="signin">
               <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
@@ -34,21 +35,29 @@
       </div>
         
         <script>
-           document.getElementById('signin').addEventListener('submit', signin);
+              document.getElementById('signin').addEventListener('submit', signin);
 
        function signin(event){
-            event.preventDefault();
+            event.preventDefault();  
+            email = document.getElementById('inputEmail1').value;
+            inputpassword = document.getElementById('inputPassword1').value;
+            invalid_login = document.getElementById('invalid_login').value;
 
-            
-            let email = document.getElementById('inputEmail1').value;
-            let password = document.getElementById('inputPassword1').value;
-          
-           fetch('http://finder.nutrichef.com.ng/api/v1/signin', {
+            let request = new Request('https://cors-anywhere.herokuapp.com/http://finder.nutrichef.com.ng/api/v1/signin', {
                 method: 'POST',
-                headers : new Headers(),
-                body:JSON.stringify({email:email,  password: password})
-            }).then((res) => res.json())
-            .then((data) =>  console.log(data))
+                headers : {'Content-Type': 'application/json'},
+                body: JSON.stringify({ 
+                    email:email,  
+                    password: inputpassword,  
+                  })
+            });
+
+            fetch(request).then((res) => res.json())
+            .then((data) => {
+            //  window.location.href = "./dashboard.html";
+            invalid_login = data.error.message;
+            console.log(data);
+            })
             .catch((err)=>console.log(err))
         }
         </script>
