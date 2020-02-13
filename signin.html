@@ -41,7 +41,7 @@
             event.preventDefault();  
             email = document.getElementById('inputEmail1').value;
             inputpassword = document.getElementById('inputPassword1').value;
-            invalid_login = document.getElementById('invalid_login').value;
+            invalid_login = document.getElementById('invalid_login');
 
             let request = new Request('https://cors-anywhere.herokuapp.com/http://finder.nutrichef.com.ng/api/v1/signin', {
                 method: 'POST',
@@ -55,7 +55,7 @@
             fetch(request).then((res) => res.json())
             .then((data) => {
             //  window.location.href = "./dashboard.html";
-            invalid_login = data.error.message;
+            invalid_login.innerHTML = data.error.message;
             console.log(data);
             })
             .catch((err)=>console.log(err))
