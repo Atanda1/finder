@@ -14,39 +14,132 @@
       <div class="form" style="height: 500px;position:relative;margin-top: 2rem;margin-top: 2rem;">
             <div style="max-height:100%;" >
           <h3>REGISTER ON FINDER</h3>
-            <form>
+            <form id="registerform">
             <div class="form-row">
-    <div class="form-group col-md-6">
-                    <input type="text" class="form-control" placeholder="First name">
+    <div class="form-group col-md-12">
+                    <input type="text" class="form-control" id="fullName" placeholder="Full name">
                 </div>
                 <div class="form-group col-md-6">
                     
-                    <input type="text" class="form-control" placeholder="Last name">
+                    <input type="text" class="form-control"  id="mobileNumber" placeholder="Mobile number">
+                    
                 </div>
+                <div class="form-group col-md-6">
+                    
+                    <input type="text" class="form-control" id="address" placeholder="Address"> 
+                    
+                </div>
+               
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+      <input type="email" class="form-control" id="email" placeholder="Email">
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Password</label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+      <input type="password" class="form-control" id="inputpassword" placeholder="Password">
     </div>
   </div>
+
   <div class="form-group">
-    <label for="inputAddress">Address</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <label for="inputPassword">Confirm Password</label>
+    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
   </div>
   
+  
   <div class="form-group">
-    
+    <label for="gender">Gender</label>
+    <input type="text" class="form-control" id="gender" placeholder="Male/Female">
   </div>
+  
   <button type="submit" class="btn btn-primary">Sign up</button>
 </form>
           </div>
       </div>
+        <script>
+
+        var fullName, mobileNumber, address, email, inputpassword, confirmPassword, gender;
+
+
+
+         function validate() {
+
+            //document.querySelector("#fullName").value;
+            fullName = document.getElementById('fullName').value;
+            mobileNumber = document.getElementById('mobileNumber').value;
+            address = document.getElementById('address').value;
+            email = document.getElementById('email').value;
+            inputpassword = document.getElementById('inputpassword').value;
+            confirmPassword = document.getElementById('confirmPassword').value;
+            gender = document.getElementById('gender').value;
+
+            console.log(fullName);
+
+          
+             
+        if ( fullName.value.trim() == ""  ) {
+            fullName.style.border = "solid 2px red !important";
+          
+            return false;
+        }
+        else if (inputpassword.value.trim() == "") {
+            inputpassword.style.border = "solid 2px red !important";
+            return false;
+        }
+         else if (address.value.trim() == "") {
+            address.style.border = "solid 2px red  !important";
+  
+            return false;
+        }
+        else if (inputpassword.value.trim().lenght<5 == "") {
+            inputpassword.style.border = "solid 2px red !important";
+            return false;
+        }
+        else if (confirmPassword.value !== password.value) {
+            confirmPassword.style.border = "solid 2px red !important";
+            return false;
+        }
         
+
+    }
+          document.getElementById('registerform').addEventListener('submit', registerform);
+
+       function registerform(event){
+            event.preventDefault();
+
+            fullName = document.getElementById('fullName').value;
+            mobileNumber = document.getElementById('mobileNumber').value;
+            address = document.getElementById('address').value;
+            email = document.getElementById('email').value;
+            inputpassword = document.getElementById('inputpassword').value;
+            confirmPassword = document.getElementById('confirmPassword').value;
+            gender = document.getElementById('gender').value;
+
+            console.log(fullName);
+
+            let request = new Request('https://cors-anywhere.herokuapp.com/http://finder.nutrichef.com.ng/api/v1/signup', {
+                method: 'POST',
+                headers : {'Content-Type': 'application/json'},
+                body: JSON.stringify({ 
+                    full_name :fullName, 
+                    email:email,  
+                    mobile_number:mobileNumber, 
+                    gender: gender, 
+                    address: address,  
+                    password: inputpassword,  
+                    password_confirmation: confirmPassword
+                  })
+            });
+
+            fetch(request).then((res) => res.json())
+            .then((data) => {
+              localStorage.setItem('access_token', data.token);
+              window.location.href = "./dashboard.html";
+            })
+            .catch((err)=>console.log(err))
+        }
+        </script>
         <script src="" async defer></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

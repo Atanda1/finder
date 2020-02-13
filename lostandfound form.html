@@ -13,25 +13,21 @@
       <div class="form" style="height: 500px;position:relative;margin-top: 2rem;margin-top: 2rem;">
             <div style="max-height:100%;" >
           <h3>LOST AND FOUND FORM</h3>
-        <form style="height:1500px;border:5px;">
+        <form id="lost_item" style="height:1500px;border:5px;">
             <div class="form-row">
               
               <div class="form-group col-md-12">
-                <input type="text" class="form-control" id="inputAddress" placeholder="Address">
+                <input type="text" class="form-control" id="itemName" placeholder="Item name">
               </div>
                   <div class="form-group col-md-12">
                       <input type="text" class="form-control" id="description" placeholder="Description">
                 </div>
-                <div class="form-group col-md-12">
-    
-                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                  </div>
                   <div class="form-group col-md-12">
-                    <input type="text" class="form-control" id="description" placeholder="Any extra info">
+                    <input type="text" class="form-control" id="location" placeholder="Location">
               </div>  
               <div class="form-group">
                 <label for="exampleFormControlFile1">Upload picture of item</label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                <input type="file" class="form-control-file" id="itemImage">
               </div>
             </div>
            
@@ -43,6 +39,29 @@
           </div>
       </div>
         
+        <script>
+            document.getElementById('registerform').addEventListener('submit', registerform);
+
+       function registerform(event){
+            event.preventDefault();
+
+            let itemName = document.getElementById('itemName').value;
+            let itemImage = document.getElementById('itemImage').value;
+            let description = document.getElementById('description').value;
+            let location = document.getElementById('location').value;
+            let password = document.getElementById('inputPassword').value;
+            let confirmPassword = document.getElementById('confirmPassword').value;
+             let gender = document.getElementById('Gender').value;
+
+            fetch('http://finder.nutrichef.com.ng/api/v1/signin', {
+                method: 'POST',
+                headers : new Headers(),
+                body:JSON.stringify({ item_name :itemName, image: itemImage, item_category: "", description: description, location: location })
+            }).then((res) => res.json())
+            .then((data) =>  console.log(data))
+            .catch((err)=>console.log(err))
+        }
+        </script>
         <script src="" async defer></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
