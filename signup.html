@@ -6,143 +6,104 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href=".\lostandfound form.css">
+        <link rel="stylesheet" href=".\style\signup.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     </head>
     <body>
-    
-      <div class="form" style="height: 500px;position:relative;margin-top: 2rem;margin-top: 2rem;">
-            <div style="max-height:100%;" >
-          <h3>REGISTER ON FINDER</h3>
-            <form id="registerform">
-            <div class="form-row">
-    <div class="form-group col-md-12">
-                    <input type="text" class="form-control" id="fullName" placeholder="Full name">
+        <form name="contactForm" id="registerform" >
+            <h2> Sign Up With Finder</h2>
+            <div class="row">
+                <label>Full Name</label>
+                <input type="text" name="name" id="fullName">
+                <div class="error" id="nameErr"></div>
+            </div>
+            <div class="row">
+                <label>Email Address</label>
+                <input type="text" name="email" id="email" required>
+                <div class="error" id="emailErr"></div>
+            </div>
+            <div class="row">
+                <label>Mobile Number</label>
+                <input type="text" name="mobile" maxlength="11" id="mobileNumber" required>
+                <div class="error" id="mobileErr"></div>
+            </div>
+            <div class="row">
+                <label>Address</label>
+                <input type="text" name="name"  id="address" required>
+                <div class="error" id="nameErr"></div>
+            </div>
+            <div class="row">
+                <label>Gender</label>
+                <div class="form-inline" required>
+                    <label><input type="radio" name="gender" value="male"> Male</label>
+                    <label><input type="radio" name="gender" value="female"> Female</label>
                 </div>
-                <div class="form-group col-md-6">
-                    
-                    <input type="text" class="form-control"  id="mobileNumber" placeholder="Mobile number">
-                    
-                </div>
-                <div class="form-group col-md-6">
-                    
-                    <input type="text" class="form-control" id="address" placeholder="Address"> 
-                    
-                </div>
-               
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" id="email" placeholder="Email">
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Password</label>
-      <input type="password" class="form-control" id="inputpassword" placeholder="Password">
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="inputPassword">Confirm Password</label>
-    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
-  </div>
-  
-  
-  <div class="form-group">
-    <label for="gender">Gender</label>
-    <input type="text" class="form-control" id="gender" placeholder="Male/Female">
-  </div>
-  
-  <button type="submit" class="btn btn-primary">Sign up</button>
-</form>
-          </div>
-      </div>
-        <script>
-
-        var fullName, mobileNumber, address, email, inputpassword, confirmPassword, gender;
+                <div class="error" id="genderErr"></div>
+            </div>
+            <div class="row">
+                <label>Password</label>
+                <input type="password" name="password" id="inputpassword" required>
+                <div class="error" id="nameErr"></div>
+            </div>
+            <div class="row">
+                <label>Confirm Password</label>
+                <input type="password" name="password" id="confirmPassword" required>
+                <div class="error" id="nameErr"></div>
+            </div>
+            <div class="row">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+      <script>
 
 
+          // Defining a function to display error message
 
-         function validate() {
+          var fullName, mobileNumber, address, email, inputpassword, confirmPassword, gender;
 
-            //document.querySelector("#fullName").value;
-            fullName = document.getElementById('fullName').value;
-            mobileNumber = document.getElementById('mobileNumber').value;
-            address = document.getElementById('address').value;
-            email = document.getElementById('email').value;
-            inputpassword = document.getElementById('inputpassword').value;
-            confirmPassword = document.getElementById('confirmPassword').value;
-            gender = document.getElementById('gender').value;
-
-            console.log(fullName);
-
-          
              
-        if ( fullName.value.trim() == ""  ) {
-            fullName.style.border = "solid 2px red !important";
+            document.getElementById('registerform').addEventListener('submit', registerform);
+           
+         function registerform(event){
+              event.preventDefault();
+              
+              fullName = document.getElementById('fullName').value;
+              mobileNumber = document.getElementById('mobileNumber').value;
+              address = document.getElementById('address').value;
+              email = document.getElementById('email').value;
+              inputpassword = document.getElementById('inputpassword').value;
+              confirmPassword = document.getElementById('confirmPassword').value;
+              document.getElementsByName('gender').forEach(el => {
+                if(el.checked){
+                  gender = el.value;
+                  }
+              });
           
-            return false;
-        }
-        else if (inputpassword.value.trim() == "") {
-            inputpassword.style.border = "solid 2px red !important";
-            return false;
-        }
-         else if (address.value.trim() == "") {
-            address.style.border = "solid 2px red  !important";
+              console.log(fullName);
   
-            return false;
-        }
-        else if (inputpassword.value.trim().lenght<5 == "") {
-            inputpassword.style.border = "solid 2px red !important";
-            return false;
-        }
-        else if (confirmPassword.value !== password.value) {
-            confirmPassword.style.border = "solid 2px red !important";
-            return false;
-        }
-        
-
-    }
-          document.getElementById('registerform').addEventListener('submit', registerform);
-
-       function registerform(event){
-            event.preventDefault();
-
-            fullName = document.getElementById('fullName').value;
-            mobileNumber = document.getElementById('mobileNumber').value;
-            address = document.getElementById('address').value;
-            email = document.getElementById('email').value;
-            inputpassword = document.getElementById('inputpassword').value;
-            confirmPassword = document.getElementById('confirmPassword').value;
-            gender = document.getElementById('gender').value;
-
-            console.log(fullName);
-
-            let request = new Request('https://cors-anywhere.herokuapp.com/http://finder.nutrichef.com.ng/api/v1/signup', {
-                method: 'POST',
-                headers : {'Content-Type': 'application/json'},
-                body: JSON.stringify({ 
-                    full_name :fullName, 
-                    email:email,  
-                    mobile_number:mobileNumber, 
-                    gender: gender, 
-                    address: address,  
-                    password: inputpassword,  
-                    password_confirmation: confirmPassword
-                  })
-            });
-
-            fetch(request).then((res) => res.json())
-            .then((data) => {
-              localStorage.setItem('access_token', data.token);
-              window.location.href = "./dashboard.html";
+                      axios.post('https://cors-anywhere.herokuapp.com/http://finder.nutrichef.com.ng/api/v1/signup', {
+                      full_name :fullName, 
+                      email:email,  
+                      mobile_number:mobileNumber, 
+                      gender: gender, 
+                      address: address,  
+                      password: inputpassword,  
+                      password_confirmation: confirmPassword
             })
-            .catch((err)=>console.log(err))
-        }
-        </script>
-        <script src="" async defer></script>
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+            .then(function (response) {
+              console.log(response);
+            })
+            .then((data) => {
+                localStorage.setItem('access_token', data.token);
+                window.location.href = "./dashboard.html";
+              })
+            .catch(function (error) {
+              console.log(error);
+            });
+         }
+          </script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      
+       
     </body>
 </html>
