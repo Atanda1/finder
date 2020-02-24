@@ -108,6 +108,7 @@
             })
             .then(function (response) {
               console.log(response);
+
             })
             .then((data) => {
                 localStorage.setItem('access_token', data.token);
@@ -115,6 +116,7 @@
               })
             .catch(function (error) {
               console.log(error);
+              getElementById("invalid_login").appendChild = error;
             });
         }
         </script>
