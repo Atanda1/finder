@@ -12,6 +12,17 @@ body {
 
   a {
     text-decoration: none;
+    color: #fff;
+  }
+
+  a:before {
+    text-decoration: none;
+    color: #fff;
+  }
+
+  a:after {
+    text-decoration: none;
+    color: #fff;
   }
   main .helper {
     background: rgba(0, 0, 0, 0.2);
