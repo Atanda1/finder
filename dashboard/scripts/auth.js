@@ -72,12 +72,15 @@ var fullName, mobileNumber, address, email, inputpassword, confirmPassword, gend
               document.getElementById("errorMessage").innerHTML= "Email has already been taken";
             }); */
 
-            auth.createUserWithEmailAndPassword(email, inputpassword).then(response => {
-              return db.collection('users').doc(response.user.uid).set({
-                fullName: fullName,
-                mobileNumber : mobileNumber,
-                address: address
-            })}).then((data) => {
+            auth.createUserWithEmailAndPassword(email, inputpassword).then(
+            //   response => {
+            //   return db.collection('users').doc(response.user.uid).set({
+            //     fullName: fullName,
+            //     mobileNumber : mobileNumber,
+            //     address: address
+            // })}
+            console.log("posted")
+            ).then((data) => {
                
                 window.location.href = "./index.html";
               }).catch(e => alert(e.message));
