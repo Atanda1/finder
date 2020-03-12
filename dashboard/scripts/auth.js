@@ -83,7 +83,7 @@ var fullName, mobileNumber, address, email, inputpassword, confirmPassword, gend
             ).then((data) => {
                
                 window.location.href = "./index.html";
-              }).catch(e => alert(e.message));
+              }).catch(e => console.log(e.message));
          }
          
              
