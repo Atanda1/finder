@@ -23,6 +23,7 @@ auth.onAuthStateChanged(user => {
         setupUI(user);
         db.collection('lost').onSnapshot(snapshot => {
             setupGuides(snapshot.docs);
+          
           });
     } else {
       setupUI();
@@ -55,11 +56,42 @@ const setupUI = (user) => {
   //logout 
   const logout = document.querySelector('.logout');
   logout.addEventListener('click', (e) => {
-  e.preventDefault();
-  auth.signOut();
+    if (confirm('Are you sure')){
+      e.preventDefault();
+      auth.signOut();
+      return true
+     } else {
+      e.preventDefault();
+       console.log('whew')
+     window.location.href = "././index.html"
+   //    return false
+       
+     }
+ 
 });
 
 
-
+function myFunction() {
+  var input, filter, pretext, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  main = document.getElementById("lost-list");
+  pretext = document.getElementById("text__pre");
+  article = main.getElementsByTagName("article");
+  for (i = 0; i < article.length; i++) {
+    
+     a = article[i].getElementsByTagName("h3")[0]
+     txtValue = a.textContent || a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          article[i].style.display = "";
+          console.log('juve')
+      } else {
+          article[i].style.display = "none";
+          console.log('chealsea')
+      }
+      console.log('chdalsea')
+  }
+  console.log('chealsea')
+}
 //adding a lost file
 

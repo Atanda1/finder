@@ -24,6 +24,8 @@
               </ul>
             </nav>
           </header>
+          <div id="searchbar"></div>
+          
 
            <main class="grid" id="lost-list">
                  
@@ -63,6 +65,11 @@
       </div>
     </div>
   </footer>
+
+    <style>
+    
+
+    </style>
    <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-app.js"></script>
           <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-auth.js"></script>
             <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-storage.js"></script>
@@ -73,25 +80,70 @@
     
 //call the lost list
 const setupGuides = (data) => {
-
+    let search = '';
     let html = '';
     data.forEach(doc => {
       const guide = doc.data();
       const list = `
-      <article>
-      <img src="${guide.image}" alt="Sample photo">
-      <div class="text">
-        <h3>${guide.name}</h3>
-        <p>Place found: ${guide.location}</p>
-        <a href="#" class="btn btn-primary btn-block">Read more</a>
-      </div>
+      <article id="article">
+          <img src="${guide.image}" alt="Sample photo">
+          <div id="text__pre" class="text">
+            <h3 class="article__div">${guide.name}</h3>
+            <p>Place found: ${guide.location}</p>
+            <a href="#" class="btn btn-primary btn-block">Read more</a>
+          </div>
     </article>
-      `;
+    `;
+      
       html += list;
+      
     });
+    const content = `
+                <div class="search-input">
+                <input onkeyup="myFunction()" id="myInput" type="text">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Search here</label>
+                <span class="glyphicon glyphicon-search"></span>
+                <span class="glyphicon glyphicon-remove"></span>
+            </div>           
+
+            `;
+            search += content;
    document.getElementById("lost-list").innerHTML = html
-  
+   document.getElementById("searchbar").innerHTML = search
   };
+
+
+  'use strict';
+
+(function() {
+
+  $('.search-input input').blur(function() {
+
+    if ($(this).val()) {
+      $(this)
+        .find('~ label, ~ span:nth-of-type(n+3)')
+        .addClass('not-empty');
+    } else {
+      $(this)
+        .find('~ label, ~ span:nth-of-type(n+3)')
+        .removeClass('not-empty');
+    }
+  });
+
+  $('.search-input input ~ span:nth-of-type(4)').click(function() {
+    $('.search-input input').val('');
+    $('.search-input input')
+      .find('~ label, ~ span:nth-of-type(n+3)')
+      .removeClass('not-empty');
+  });
+  
+  console.log('Hello from console!');
+
+});
+
+
     </script>
         <script src="" async defer></script>
     </body>
