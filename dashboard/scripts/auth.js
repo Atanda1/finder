@@ -1,28 +1,25 @@
-var fullName, mobileNumber, address, email, inputpassword, confirmPassword, gender;
+var fullName, mobileNumber, address, email, inputpassword, confirmPassword, gender;        
+document.getElementById('registerform').addEventListener('submit', registerform);
 
-             
-            document.getElementById('registerform').addEventListener('submit', registerform);
-           
-         function registerform(event){
-              event.preventDefault();
-              
-              fullName = document.getElementById('fullName').value;
-              mobileNumber = document.getElementById('mobileNumber').value;
-              address = document.getElementById('address').value;
-              email = document.getElementById('email').value;
-              inputpassword = document.getElementById('inputpassword').value;
-              confirmPassword = document.getElementById('confirmPassword').value;
-              document.getElementsByName('gender').forEach(el => {
-                if(el.checked){
-                  gender = el.value;
-                  }
-              });
+function registerform(event){
+  event.preventDefault();
+    fullName = document.getElementById('fullName').value;
+    mobileNumber = document.getElementById('mobileNumber').value;
+    address = document.getElementById('address').value;
+    email = document.getElementById('email').value;
+    inputpassword = document.getElementById('inputpassword').value;
+    confirmPassword = document.getElementById('confirmPassword').value;
+    document.getElementsByName('gender').forEach(el => {
+      if(el.checked){
+        gender = el.value;
+      }
+});
           
           
    
     if(inputpassword != "" && inputpassword ==  confirmPassword) {
       if(inputpassword.length < 8) {
-        errorMessage.innerHTML = "Error: Password must contain at least six characters!";
+        errorMessage.innerHTML = "Error: Password must contain at least 8 characters , at least one uppercase, and a number!";
         document.getElementById('inputpassword').focus();
         return false;
       }
@@ -49,41 +46,21 @@ var fullName, mobileNumber, address, email, inputpassword, confirmPassword, gend
       document.getElementById('inputpassword').focus();
       return false;
     }
-              console.log(fullName);
-  
-                    /*  axios.post('https://cors-anywhere.herokuapp.com/http://finder.nutrichef.com.ng/api/v1/signup', {
-                      full_name :fullName, 
-                      email:email,  
-                      mobile_number:mobileNumber, 
-                      gender: gender, 
-                      address: address,  
-                      password: inputpassword,  
-                      password_confirmation: confirmPassword
-            })
-            .then(function (response) {
-              console.log(response);
-            })
-            .then((data) => {
-                localStorage.setItem('access_token', data.token);
-                window.location.href = "./dashboard.html";
-              })
-            .catch(function (error) {
-              console.log(error);
-              document.getElementById("errorMessage").innerHTML= "Email has already been taken";
-            }); */
-
-            auth.createUserWithEmailAndPassword(email, inputpassword).then(
-            //   response => {
-            //   return db.collection('users').doc(response.user.uid).set({
-            //     fullName: fullName,
-            //     mobileNumber : mobileNumber,
-            //     address: address
-            // })}
-            console.log("posted")
-            ).then((data) => {
-               
-                window.location.href = "./index.html";
-              }).catch(e => console.log(e.message));
-         }
+    console.log(fullName);
+    auth.createUserWithEmailAndPassword(email, inputpassword).then( cred => {
+      return db.collection('users').doc(cred.user.uid).set ({
+        name : fullName,
+        phone_number : mobileNumber,
+        email: email,
+        address :address
+      })
+    }).then(() => {
+      window.location.href = "./index.html";
+      console.log("posted")
+    }).catch(e => 
+    errorMessage.innerHTML = e.message
+    );
+}
          
              
+

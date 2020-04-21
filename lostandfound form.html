@@ -121,9 +121,11 @@ function uploadImage() {
     .then(() => {
        console.log(image)
        console.log("posted")
+        window.location.href = './lostlist.html'
      }).catch(err => {
        console.log(err.message);
        console.log("wtf2")
+      
      });
       })
         .catch(console.error);}</script>

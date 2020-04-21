@@ -37,6 +37,13 @@ const loggedOutLinks = document.querySelectorAll('.logged-out');
 const loggedInLinks = document.querySelectorAll('.logged-in');
 const setupUI = (user) => {
     if (user) {
+
+      db.collection('users').doc(user.uid).get().then( doc => {
+        const welcome = `
+          <div> Welcome, ${doc.data().name}</div>        
+        `;
+        document.getElementById('signinn').innerHTML = welcome;
+      })
       // toggle user UI elements
       loggedInLinks.forEach(item => item.style.display = 'block');
       loggedOutLinks.forEach(item => item.style.display = 'none');
@@ -78,8 +85,7 @@ function myFunction() {
   main = document.getElementById("lost-list");
   pretext = document.getElementById("text__pre");
   article = main.getElementsByTagName("article");
-  for (i = 0; i < article.length; i++) {
-    
+  for (i = 0; i < article.length; i++) {   
      a = article[i].getElementsByTagName("h3")[0]
      txtValue = a.textContent || a.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {
