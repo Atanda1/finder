@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href=".\style\signup.css">
+        <link rel="stylesheet" href=".\style\main.css">
+    </head>
+    <body>
+        
+         <form name="contactForm" id="registerform"  method = "POST">
+            <h2> Claim Item</h2>
+            <div class="row">
+                <label>Where was it last seen</label>
+                <input type="text" name="lastSeen" id="lastSeen" required>
+                <div class="error" id="mobileErr"></div>
+            </div>
+            <div class="row">
+                <label>How was it misplaced</label>
+                <input type="text" name="name"  id="address" required>
+                <div class="error" id="nameErr"></div>
+            </div>
+            <div class="row">
+                <label>Detailed Description</label>
+                <input type="text" name="name"  id="description" required>
+                <div class="error" id="nameErr"></div>
+            </div>
+            <div class="row">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+          <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-app.js"></script>
+          <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-auth.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-storage.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-analytics.js"></script>
+         <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-firestore.js"></script>
+        <script>
+
+      
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const id = urlParams.get('id')
+        console.log(id);
+
+        
+          var firebaseConfig = {
+            apiKey: "AIzaSyDnu7wxYQNay5_EAroXWzX8PdUBzfwPnZg",
+            authDomain: "finder-app-9ec75.firebaseapp.com",
+            databaseURL: "https://finder-app-9ec75.firebaseio.com",
+            projectId: "finder-app-9ec75",
+            storageBucket: "finder-app-9ec75.appspot.com",
+            messagingSenderId: "1045507956536",
+            appId: "1:1045507956536:web:450340d66c416bf065ebcd",
+            measurementId: "G-EMKFV07MRR"
+        };
+         firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        const auth =firebase.auth();
+        const db =firebase.firestore();
+        
+        document.querySelector('#registerform').addEventListener('submit', (e) => {
+         e.preventDefault();
+         console.log("wtf")
+         db.collection('claim').add({
+        claimDescription :  document.querySelector('#description').value,
+        lastSeen: document.querySelector('#lastSeen').value,
+        claimAddress : document.querySelector('#address').value,
+        claimerNumber: localStorage.getItem('number'),
+        posterId: id,
+        claimerId : localStorage.getItem('uid')
+      })
+        .then(() => {
+            alert("Claim received")
+            window.location.href = "./index.html";
+            console.log("posted")
+        }).catch(e => 
+            errorMessage.innerHTML = e.message
+        );
+        });
+
+        </script>
+    </body>
+</html>

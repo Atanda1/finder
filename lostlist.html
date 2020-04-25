@@ -18,6 +18,7 @@
             </div>
             <nav>
               <ul>
+               <li><a href="./signin.html" id="welcome" class="nav logged-in"></a></li>
                 <li><a href="./lostandfound form.html">Found something!?</a></li>
                 <li><a href="#">Team</a></li>
                  <span class="logout">Logout</span>
@@ -85,18 +86,16 @@ const setupGuides = (data) => {
     data.forEach(doc => {
       const guide = doc.data();
       const list = `
-      <article id="article">
-          <img src="${guide.image}" alt="Sample photo">
+      <article data-id="${guide.posterId}" id="article">
+          <img src="${guide.image}"  alt="Sample photo">
           <div id="text__pre" class="text">
             <h3 class="article__div">${guide.name}</h3>
             <p>Place found: ${guide.location}</p>
-            <a href="#" class="btn btn-primary btn-block">Read more</a>
+            <button href="#" class="claim btn btn-primary btn-block">Claim</button>
           </div>
     </article>
     `;
-      
       html += list;
-      
     });
     const content = `
                 <div class="search-input">
@@ -112,6 +111,17 @@ const setupGuides = (data) => {
             search += content;
    document.getElementById("lost-list").innerHTML = html
    document.getElementById("searchbar").innerHTML = search
+
+   const claim = document.querySelectorAll('.claim');
+   claim.forEach(item => { item.addEventListener('click', (e) => {
+      e.preventDefault();
+       console.log('whew')
+       let id = e.target.parentElement.parentElement.getAttribute('data-id')
+       console.log(id)
+        url = './claimed.html?id=' + encodeURIComponent(id);
+        document.location.href = url;
+         })
+       })
   };
 
 

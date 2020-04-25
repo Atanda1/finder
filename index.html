@@ -26,7 +26,7 @@
       <ul>
         <li><a href="./signup.html" class="nav logged-out">Register</a></li>
         <li><a href="./signin.html" id="signin" class="nav logged-out">Sign in</a></li>
-          <li><a href="./signin.html" id="signinn" class="nav logged-in"></a></li>
+          <li><a href="./signin.html" id="welcome" class="nav logged-in"></a></li>
           <li><a href="./dashboard/dashboard.html" id="signin" class="nav logged-in">Dashboard</a></li>
            <li><a href="./signin.html" id="signin" class="nav logged-in logout">Log Out</a></li>
       </ul>
@@ -157,20 +157,36 @@
   <script>
     const setupGuides = (data) => {
 
-    var htmlList = '<h3 class="trending" >TRENDING ITEMS</h3>';
+    var htmlList = '';
     data.slice(1).forEach(doc => {
       const guide = doc.data();
       const trend = `
-      <article>
+      <article data-id="${guide.posterId}" id="article">
       <img src="${guide.image}" alt="Sample photo">
       <div class="text">
         <h3>${guide.name}</h3>
         <p>Place found: ${guide.location}</p>
-        <a href="#" class="btn btn-primary btn-block">Read more</a>
+        <button href="#" class="claim btn btn-primary btn-block">Claim</button>
       </div>
     </article>
       `;
+
+      let article = getElementById('#article')
+      article.setAttribute('data-id', guide.posterId)
+      html += list;
+      
       htmlList += trend;
+
+       const claim = document.querySelectorAll('.claim');
+       claim.forEach(item => { item.addEventListener('click', (e) => {
+       e.preventDefault();
+       console.log('whew')
+       let id = e.target.parentElement.parentElement.getAttribute('data-id')
+       console.log(id)
+        url = './claimed.html?id=' + encodeURIComponent(id);
+        document.location.href = url;
+         })
+       })
     });
     console.log(htmlList)
     document.getElementById("trending__list").innerHTML = htmlList

@@ -20,15 +20,47 @@ db.settings({ timestampsInSnapshots: true });
 auth.onAuthStateChanged(user => {
     if (user) {
         console.log("user logged in", user)
+        console.log(user.uid)
+         localStorage.setItem('uid', user.uid)
         setupUI(user);
         db.collection('lost').onSnapshot(snapshot => {
-            setupGuides(snapshot.docs);
-          
+            setupGuides(snapshot.docs);         
           });
+        //db.collection('claim').onSnapshot(snapshot => {
+         //   notification(snapshot.docs);         
+          // });
+          db.collection("claim").where("posterId", "==", user.uid)
+        .get()
+        .then(function(querySnapshot) {
+            querySnapshot.forEach(doc => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+                const data = doc.data()
+                let html = '';
+                  const list = `
+                      <div id="text__pre" class="text">
+                          <h3 class="article__div">${data.claimDescription}</h3>
+                          <p>Last seen: ${data.lastSeen}</p>
+                          <p>Place found: ${data.claimAddress}</p>
+                          <p>Claimer phone number: ${data.claimerNumber}</p>
+                          <button href="#" class="claim btn btn-primary btn-block">Claim</button>
+                      </div>
+                  `;
+                  html += list;
+                  ;
+              document.getElementById("lost-list").innerHTML = html
+            });
+            
+        })
+        .catch(function(error) {
+            console.log("Error getting documents: ", error);
+        });
+
     } else {
       setupUI();
       console.log("user logged out")
       setupGuides([]);
+      notification([])
     }
   });
 
@@ -42,7 +74,8 @@ const setupUI = (user) => {
         const welcome = `
           <div> Welcome, ${doc.data().name}</div>        
         `;
-        document.getElementById('signinn').innerHTML = welcome;
+        localStorage.setItem('number', doc.data().phone_number)
+        document.getElementById('welcome').innerHTML = welcome;
       })
       // toggle user UI elements
       loggedInLinks.forEach(item => item.style.display = 'block');
@@ -60,12 +93,14 @@ const setupUI = (user) => {
     }
   };
   
+
   //logout 
   const logout = document.querySelector('.logout');
   logout.addEventListener('click', (e) => {
     if (confirm('Are you sure')){
       e.preventDefault();
       auth.signOut();
+      localStorage.removeItem('uid')
       return true
      } else {
       e.preventDefault();
@@ -100,4 +135,9 @@ function myFunction() {
   console.log('chealsea')
 }
 //adding a lost file
+
+
+     
+ 
+
 

@@ -114,7 +114,8 @@ function uploadImage() {
         name: document.querySelector('#itemName').value,
         description: document.querySelector('#description').value,
         location: document.querySelector('#location').value,
-        image: image
+        image: image,
+        posterId: localStorage.getItem('uid')
     })
    
        //save picture of image
