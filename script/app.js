@@ -46,7 +46,7 @@ auth.onAuthStateChanged(user => {
                           <p>Claimer phone number: ${data.claimerNumber}</p>    
                       </div>
                   `;
-                  html = list;
+                  html += list;
                   document.getElementById("lost-list").innerHTML = html
             });
 
