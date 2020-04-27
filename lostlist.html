@@ -19,8 +19,8 @@
             <nav>
               <ul>
                <li><a href="./signin.html" id="welcome" class="nav logged-in"></a></li>
-                <li><a href="./lostandfound form.html">Found something!?</a></li>
-                <li><a href="#">Team</a></li>
+                <li  style="display:none;"><a href="./lostandfound form.html">Found something!?</a></li>
+                <li  style="display:none;"><a href="#">Team</a></li>
                  <span class="logout">Logout</span>
               </ul>
             </nav>
@@ -31,7 +31,7 @@
            <main class="grid" id="lost-list">
                  
                 </main>
-
+          
 
 
 
@@ -87,11 +87,9 @@ const setupGuides = (data) => {
       const guide = doc.data();
       const list = `
       <article data-id="${guide.posterId}" id="article">
-        <div id="img">
-          <img src="${guide.image}"  alt="Sample photo">
-        </div>  
+          <img src="${guide.image}"  alt="Sample photo"> 
           <div id="text__pre" class="text">
-            <h3 class="article__div">${guide.name}</h3>
+            <h5 class="article__div">${guide.name}</h5>
             <p>Place found: ${guide.location}</p>
             <button href="#" class="claim btn btn-primary btn-block">Claim</button>
           </div>

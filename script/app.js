@@ -29,8 +29,8 @@ auth.onAuthStateChanged(user => {
         //db.collection('claim').onSnapshot(snapshot => {
          //   notification(snapshot.docs);         
           // });
-          const html = ''
-          const list = ''
+          let html = ''
+          
           db.collection("claim").where("posterId", "==", user.uid)
         .get()
         .then(querySnapshot=> {
@@ -38,7 +38,7 @@ auth.onAuthStateChanged(user => {
                 // doc.data() is never undefined for query doc snapshots
                 console.log(doc.id, " => ", doc.data());
                 const data = doc.data();
-                   list += `
+                   html += `
                       <div id="text__pre" class="text">
                           <h3 class="article__div">${data.claimDescription}</h3>
                           <p>Last seen: ${data.lastSeen}</p>
@@ -46,7 +46,6 @@ auth.onAuthStateChanged(user => {
                           <p>Claimer phone number: ${data.claimerNumber}</p>    
                       </div>
                   `;
-                  html += list;
                   document.getElementById("lost-list").innerHTML = html
             });
 
