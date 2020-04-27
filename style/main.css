@@ -631,12 +631,12 @@ footer .socials {
   }
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
     grid-gap: 20px;
-    align-items: stretch;
+    align-items: self-position;
     width: 60vw;
     margin: 0 auto;
-    margin-top: 2rem;
+    margin-top: .1rem;
   }
   
   .grid > article {
@@ -644,12 +644,16 @@ footer .socials {
     box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
   }
   
-  .grid > article img {
+  .grid > article #img {
     max-width: 100%;
   }
   
+  .grid > article #img img{
+    width: 100%;
+  }
+  
   .grid .text {
-    padding: 20px;
+    padding: 2px;
   }
   
 

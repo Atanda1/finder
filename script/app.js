@@ -29,29 +29,29 @@ auth.onAuthStateChanged(user => {
         //db.collection('claim').onSnapshot(snapshot => {
          //   notification(snapshot.docs);         
           // });
+          const html = ''
+          const list = ''
           db.collection("claim").where("posterId", "==", user.uid)
         .get()
-        .then(function(querySnapshot) {
+        .then(querySnapshot=> {
             querySnapshot.forEach(doc => {
                 // doc.data() is never undefined for query doc snapshots
                 console.log(doc.id, " => ", doc.data());
-                const data = doc.data()
-                let html = '';
-                  const list = `
+                const data = doc.data();
+                   list += `
                       <div id="text__pre" class="text">
                           <h3 class="article__div">${data.claimDescription}</h3>
                           <p>Last seen: ${data.lastSeen}</p>
                           <p>Place found: ${data.claimAddress}</p>
-                          <p>Claimer phone number: ${data.claimerNumber}</p>
-                          <button href="#" class="claim btn btn-primary btn-block">Claim</button>
+                          <p>Claimer phone number: ${data.claimerNumber}</p>    
                       </div>
                   `;
-                  html += list;
-                  ;
-              document.getElementById("lost-list").innerHTML = html
+                  html = list;
+                  document.getElementById("lost-list").innerHTML = html
             });
-            
-        })
+
+
+            })
         .catch(function(error) {
             console.log("Error getting documents: ", error);
         });

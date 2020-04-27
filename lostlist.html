@@ -87,7 +87,9 @@ const setupGuides = (data) => {
       const guide = doc.data();
       const list = `
       <article data-id="${guide.posterId}" id="article">
+        <div id="img">
           <img src="${guide.image}"  alt="Sample photo">
+        </div>  
           <div id="text__pre" class="text">
             <h3 class="article__div">${guide.name}</h3>
             <p>Place found: ${guide.location}</p>
