@@ -29,7 +29,7 @@ auth.onAuthStateChanged(user => {
         //db.collection('claim').onSnapshot(snapshot => {
          //   notification(snapshot.docs);         
           // });
-          let html = ''
+          let lostList = ''
           
           db.collection("claim").where("posterId", "==", user.uid)
         .get()
@@ -46,7 +46,7 @@ auth.onAuthStateChanged(user => {
                           <p>Claimer phone number: ${data.claimerNumber}</p>    
                       </div>
                   `;
-                  document.getElementById("lost-list").innerHTML = html
+                  document.getElementById("lost-list").innerHTML = lostList
             });
 
 
