@@ -38,7 +38,7 @@ auth.onAuthStateChanged(user => {
                 // doc.data() is never undefined for query doc snapshots
                 console.log(doc.id, " => ", doc.data());
                 const data = doc.data();
-                   html += `
+                  lostList += `
                       <div id="text__pre" class="text">
                           <h3 class="article__div">${data.claimDescription}</h3>
                           <p>Last seen: ${data.lastSeen}</p>
@@ -46,7 +46,7 @@ auth.onAuthStateChanged(user => {
                           <p>Claimer phone number: ${data.claimerNumber}</p>    
                       </div>
                   `;
-                  document.getElementById("lost-list").innerHTML = lostList
+                  document.getElementById("lost-listt").innerHTML = lostList
             });
 
 
